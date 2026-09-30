@@ -12,4 +12,4 @@ jobs:
   slow:
     runs-on: ubuntu-latest
     steps:
-      - run: sleep 90 && echo "finished"
+      - run: sleep 90 && echo "was finished finished"
