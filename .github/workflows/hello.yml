@@ -1,13 +1,18 @@
-name: Injectable
+name: What can this token do
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-    greet:
-        runs-on: ubuntu-latest
-        steps:
-            - id: vars
-              run: echo "short=${GITHUB_SHA:0:7}" >> "$GITHUB_OUTPUT"
-            - run: echo "Short SHA is [${{ steps.vars.outputs.short }}]"
-            - run: echo "Typo gives [${{ steps.vars.outputs.shrot }}]"
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Try to read the repo
+        run: gh repo view --json name
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Try to create an issue
+        continue-on-error: true
+        run: gh issue create --title "token probe" --body "delete me"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
