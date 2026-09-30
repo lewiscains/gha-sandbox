@@ -7,7 +7,7 @@ jobs:
     greet:
         runs-on: ubuntu-latest
         steps:
-            - run: cat .github/workflows/hello.yml
             - uses: actions/checkout@v7.0.1
+            - run: cat .github/workflows/hello.yml
             - run: ls -la
             - run: echo "Hello from a machine that will not exist in 30 seconds"
