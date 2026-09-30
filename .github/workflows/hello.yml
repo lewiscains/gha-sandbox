@@ -1,10 +1,11 @@
 name: Hello
 
 on:
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
-  greet:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Hello from a machine that will not exist in 30 seconds"
+    greet:
+        runs-on: ubuntu-latest
+        steps:
+            - run: ls -la
+            - run: echo "Hello from a machine that will not exist in 30 seconds"
