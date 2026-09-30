@@ -10,6 +10,6 @@ gh run view <run-id> --log-failed    # after it finishes: failed steps' logs onl
 'On:' is the trigger block. `workflow_dispatch` means a human must trigger (`gh workflow run hello.yml`).
 
 Three ways to fire a workflow_dispatch:
-    - "Run workflow" button, Actions tab
-    - gh workflow run hello.yml
-    - REST API
+- "Run workflow" button, Actions tab
+- gh workflow run hello.yml
+- REST API
