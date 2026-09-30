@@ -14,7 +14,7 @@ jobs:
             GH_REPO: ${{ github.repository }}
         steps:
             - name: Try to read the repo
-              run: gh repo view --json name
+              run: gh repo view "$GH_REPO" --json name
 
             - name: Try to create an issue
               continue-on-error: true
