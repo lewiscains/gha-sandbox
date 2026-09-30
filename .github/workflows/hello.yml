@@ -1,15 +1,19 @@
 name: Injectable
 
 on:
-  pull_request:
+    pull_request:
 
 jobs:
-  greet:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Vulnerable
-        run: echo "Title is ${{ github.event.pull_request.title }}"
-      - name: Safe
-        env:
-          TITLE: ${{ github.event.pull_request.title }}
-        run: echo "Title is $TITLE"
+    greet:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Vulnerable
+              run: echo "Title is ${{ github.event.pull_request.title }}"
+            - name: Safe
+              env:
+                  TITLE: ${{ github.event.pull_request.title }}
+              run: echo "Title is $TITLE"
+            - id: vars
+              run: echo "short=${GITHUB_SHA:0:7}" >> "$GITHUB_OUTPUT"
+            - run: echo "Short SHA is [${{ steps.vars.outputs.short }}]"
+            - run: echo "Typo gives [${{ steps.vars.outputs.shrot }}]"
