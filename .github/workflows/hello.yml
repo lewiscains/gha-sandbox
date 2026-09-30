@@ -1,0 +1,10 @@
+name: Hello
+
+on:
+  workflow_dispatch:
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello from a machine that will not exist in 30 seconds"
