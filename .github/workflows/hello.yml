@@ -1,22 +1,16 @@
-name: What do I see2
+name: Boundary
 
 on:
-    push:
-        branches: [main]
-        tags: ["v*"]
-    pull_request:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-    inspect:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v7.0.1
-            - name: Is this SHA in my branch history?
-              run: git log --oneline -1 "${{ github.sha }}" || echo "NOT FOUND in this clone"
-            - name: Greet the PR
-              run: echo "Building ${{ github.event.pull_request.title }}"
-            - name: Greet the PR2
-              env:
-                TITLE: ${{ github.event.pull_request.title }}
-              run: echo "Building $TITLE"
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Who expands what
+        env:
+          SAFE: ${{ github.ref }}
+        run: |
+          echo "GitHub substituted: ${{ github.ref }}"
+          echo "Shell expanded:     $SAFE"
+          echo "Shell, not GitHub:  $GITHUB_REF"
