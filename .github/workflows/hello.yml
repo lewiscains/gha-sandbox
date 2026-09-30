@@ -1,18 +1,26 @@
-name: Hello
+name: What do I see
 
 on:
+    push:
+        branches: [main]
+        tags: ["v*"]
+    pull_request:
     workflow_dispatch:
 
 jobs:
-    writer:
+    inspect:
         runs-on: ubuntu-latest
         steps:
-            - run: echo "a secret message" > /tmp/note.txt
-            - run: cat /tmp/note.txt
-            - run: echo "fixed"
-
-    reader:
-        runs-on: ubuntu-latest
-        needs: writer
-        steps:
-            - run: cat /tmp/note.txt
+            - uses: actions/checkout@v7.0.1
+            - name: Report context
+              run: |
+                  {
+                    echo "| field | value |"
+                    echo "|---|---|"
+                    echo "| event_name | ${{ github.event_name }} |"
+                    echo "| ref | ${{ github.ref }} |"
+                    echo "| sha | ${{ github.sha }} |"
+                    echo "| head_ref | ${{ github.head_ref }} |"
+                  } >> "$GITHUB_STEP_SUMMARY"
+            - name: Is this SHA in my branch history?
+              run: git log --oneline -1 "${{ github.sha }}" || echo "NOT FOUND in this clone"
