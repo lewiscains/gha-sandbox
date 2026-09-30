@@ -1,21 +1,15 @@
-name: What can this token do
+name: Race
 
 on:
-    workflow_dispatch:
+  push:
+    branches: [main]
 
-permissions:
-    contents: read
-    issues: write
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-    probe:
-        runs-on: ubuntu-latest
-        env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GH_REPO: ${{ github.repository }}
-        steps:
-            - name: Try to read the repo
-              run: gh repo view "$GH_REPO" --json name
-
-            - name: Try to create an issue
-              continue-on-error: true
-              run: gh issue create --title "token probe" --body "delete me"
+  slow:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 90 && echo "finished"
