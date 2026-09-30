@@ -5,17 +5,17 @@ on:
 
 permissions:
     contents: read
-    
+
 jobs:
     probe:
         runs-on: ubuntu-latest
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_REPO: ${{ github.repository }}
         steps:
             - name: Try to read the repo
               run: gh repo view --json name
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
             - name: Try to create an issue
               continue-on-error: true
               run: gh issue create --title "token probe" --body "delete me"
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
