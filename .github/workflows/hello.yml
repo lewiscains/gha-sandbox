@@ -4,8 +4,8 @@ on:
     workflow_dispatch:
 
 permissions:
-    contents: write
-
+    contents: read
+    issues: write
 jobs:
     probe:
         runs-on: ubuntu-latest
