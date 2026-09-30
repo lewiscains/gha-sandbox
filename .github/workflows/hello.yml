@@ -4,10 +4,14 @@ on:
     workflow_dispatch:
 
 jobs:
-    greet:
+    writer:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v7.0.1
-            - run: cat .github/workflows/hello.yml
-            - run: ls -la
-            - run: echo "Hello from a machine that will not exist in 30 seconds"
+            - run: echo "a secret message" > /tmp/note.txt
+            - run: cat /tmp/note.txt
+
+    reader:
+        runs-on: ubuntu-latest
+        needs: writer
+        steps:
+            - run: cat /tmp/note.txt
