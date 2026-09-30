@@ -7,5 +7,6 @@ jobs:
     greet:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v7.0.1
             - run: ls -la
             - run: echo "Hello from a machine that will not exist in 30 seconds"
