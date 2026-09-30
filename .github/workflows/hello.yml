@@ -9,6 +9,7 @@ jobs:
         steps:
             - run: echo "a secret message" > /tmp/note.txt
             - run: cat /tmp/note.txt
+            - run: exit 1
 
     reader:
         runs-on: ubuntu-latest
