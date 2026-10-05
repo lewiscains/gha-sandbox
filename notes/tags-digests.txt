@@ -1,0 +1,4 @@
+`docker buildx imagetools inspect "$IMAGE:demo" | head -3`
+    Name:      ghcr.io/lewiscains/gha-sandbox:demo
+    MediaType: application/vnd.docker.distribution.manifest.v2+json
+    Digest:    sha256:7f670e260a786d911978d23c86fce19263918341523af13460217a01419bb11b
