@@ -16,11 +16,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v7.0.1
-              with:
-                  sparse-checkout: |
-                      /*
-                      !/climatefiles/
-                  sparse-checkout-cone-mode: false
 
             - name: Checkout size
               run: |
