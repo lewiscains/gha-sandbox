@@ -37,5 +37,5 @@ jobs:
           platforms: linux/amd64
           push: false
           # STEP 1, second half: uncomment these two lines
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+        #   cache-from: type=gha
+        #   cache-to: type=gha,mode=max
