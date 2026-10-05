@@ -3,39 +3,38 @@ name: Caching experiments
 # Exercise 0008. Builds only — never pushes — so it needs no login and no packages permission.
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-  workflow_dispatch:
+    push:
+        branches: [main]
+    pull_request:
+    workflow_dispatch:
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7.0.1
-        # STEP 4: uncomment these four lines to skip climatefiles/
-        # with:
-        #   sparse-checkout: |
-        #     /*
-        #     !/climatefiles/
-        #   sparse-checkout-cone-mode: false
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v7.0.1
+              with:
+                  sparse-checkout: |
+                      /*
+                      !/climatefiles/
+                  sparse-checkout-cone-mode: false
 
-      - name: Checkout size
-        run: |
-          du -sh .
-          ls climatefiles/ 2>&1 || echo "climatefiles NOT PRESENT — as intended"
+            - name: Checkout size
+              run: |
+                  du -sh .
+                  ls climatefiles/ 2>&1 || echo "climatefiles NOT PRESENT — as intended"
 
-      - uses: docker/setup-buildx-action@v4.4.1
+            - uses: docker/setup-buildx-action@v4.4.1
 
-      - uses: docker/build-push-action@v7.4.0
-        with:
-          context: .
-          file: Dockerfile.slow
-          platforms: linux/amd64
-          push: false
-          # STEP 1, second half: uncomment these two lines
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+            - uses: docker/build-push-action@v7.4.0
+              with:
+                  context: .
+                  file: Dockerfile.slow
+                  platforms: linux/amd64
+                  push: false
+                  # STEP 1, second half: uncomment these two lines
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
