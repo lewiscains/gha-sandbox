@@ -1,4 +1,3 @@
 FROM alpine:3
-RUN echo "expensive dependency layer" && sleep 60
-COPY . /app
-CMD ["cat", "/app/README.md"]
+RUN echo "pretend this took four minutes" > /note.txt
+CMD ["cat", "/note.txt"]
